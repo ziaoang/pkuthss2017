@@ -1,12 +1,95 @@
-% Copyright (c) 2014,2016 Casper Ti. Vector
-% Public domain.
-
 \begin{cabstract}
-	\pkuthssffaq % 中文测试文字
+随着互联网的快速发展，以用户产生内容为标志的Web2.0时代到来，大量且庞杂的信息充斥着人们的日常生活。
+电商平台里的商品、媒体网站里的新闻、小说网站里的作品、招聘网站里的职位等，
+当数量超过用户可以遍历的上限时，用户就无所适从了。
+推荐系统可以对海量信息进行筛选、过滤，将用户最关注最感兴趣的信息展现在用户面前，能大大增加这些内容的转化率，
+对各类应用系统都有非常巨大的价值，逐渐成为互联网平台不可或缺的一环。
+例如，著名的电商网站亚马逊公司拥有``推荐系统之王''的称号，大概有35\%的销售额是与推荐系统相关的；
+又例如国内的阿里巴巴公司，在推荐系统上也有重金投入，举办过类似``天猫推荐算法大赛''、``阿里移动推荐算法''
+等多项推荐系统学术竞赛。
+
+协同过滤作为推荐系统中应用最广泛的算法之一，可以对用户兴趣分布进行分析，从大量用户群体中找到相似兴趣的用户邻居，
+综合这些相似兴趣用户的兴趣偏好，形成推荐系统对目标用户的喜好程度预测。
+传统的协同过滤算法的基本假设是被同一用户偏爱的物品具有相似的兴趣分布，或者喜欢相同物品的用户拥有相似的兴趣分布。
+但在真实的场景中，该假设并都是成立的，因为人的兴趣分布会随着时间的流逝发生变化。
+为了描述这种兴趣漂移的现象，本文定义了用户的长期兴趣分布和短期兴趣分布
+来刻画用户在不同时间区间的兴趣状态。与此同时本文在传统协同过滤假设的基础上
+又提出了两个改进版本的假设，用以刻画物品在用户的交互时间线上的兴趣分布变化。
+
+大数据时代的来临积累了大量的用户数据，同时计算机硬件性能的大幅度提升，这些改变带了深度学习的风靡兴起。
+深度学习作为一种机器学习范式，利用定制的神经网络结构对学习任务进行建模，
+尝试直接从原始数据向预测目标进行端到端的转换，从而省去了大量的构建特征工程的人力花销。
+深度学习在语音识别、图像识别等诸多研究领域上取得了突破性的进展，
+将人工智能引上了一个新的台阶，不仅学术意义重大，而且工业实用性很强，催化了大量智能产品的诞生。
+
+自然语言处理领域中引用深度学习，利用浅层神经网络结构学习出更好的词向量表示，在文本分类、
+机器翻译等评测任务上取得巨大的进展。受到句向量表示算法的启发，本文提出了长短期兴趣模型来刻画两个改进版本的假设。
+长短期兴趣模型引入了一个神经网络结构来提取用户交互时间线上的序列信息，
+从而训练处更好的用户表示和物品表示，然后再利用基于特征的协同过滤框架进行融合，
+解决推荐系统中的电影评分预测任务。本文在两类真实世界数据集上进行了多组实验，
+大量实验结果表明了长短期兴趣模型在预测准确率上都超过传统协同过滤算法，同时和目前最优模型的结果差距很小，
+证明了长短期兴趣模型的算法有效性。
 \end{cabstract}
 
 \begin{eabstract}
-	Test of the English abstract.
+With the rapid development of the Internet, the Web2.0 era comes with User-Generate-Content spring up,
+a great deal of information floods people's daily life. Products in electric business platform, 
+news in media websites, works in novels websites and jobs in recruitment websites,
+when the number is bigger than the upper limit users can traverse, the user will be at a loss.
+Recommender system can filter the massive information, 
+find the most concerned and interesting information to displayed in front of the user,
+and greatly increase the conversion rate of these content.
+Recommender system is valuable for vast types of applications,
+and gradually becomes an indispensable part of most Internet platform.
+For example, the famous e-commerce site Amazon has the title of ``Recommender System King'',
+about 35\% of sales are related to its recommender system;
+Another example is the domestic Alibaba company,
+it has invested lots of money in recommender system field,
+and held a number of recommender system academic competition,
+such as ``TMall Recommended Algorithm Contest '' and ``Ali Mobile Recommendation Algorithm''.
+
+As one of the most widely used algorithms in the recommender system,
+collaborative filtering can analyze the user interest distribution,
+find similar users from a large number of user groups,
+form the preference prediction of target users for recommender system,
+via synthesizing these similar users' interest preferences.
+The basic assumption of a conventional collaborative filtering algorithm is
+that the items favored by the same user have a similar distribution of interest,
+or that users who prefer the same item have similar interest distributions.
+However in the real scene, the assumption are not always true,
+because the distribution of people's interests will change over time.
+In order to describe this phenomenon of interest drift,
+this paper defines the user's long-term interest distribution and short-term interest distribution
+to describe the user's interest status in different time interval.
+At the same time, this paper proposes two improved version of the hypothesis
+based on the traditional cooperative filtering hypothesis,
+to describe the items in the user's interactive time on the distribution of interest changes.
+
+Big data era has accumulated a lot of user data, while the computer hardware performance has
+won a huge upgrade, these changes make deep learning spring up rapidly.
+Deep learning, as a machine learning paradigm, take advantage of custom neural network structure
+to model the learning task, attempt to perform end-to-end conversions directly from the raw data
+to the forecasting target, with the goal to save the cost of artificial feature engineering.
+Deep learning has made breakthrough improvement in many research field, such as speech recognition
+and image recognition, help lead artificial intelligence to a new level.
+It not only has a significant academic significance, also shows a great practicability in
+industrial circles, a large number of intelligent products are born with its contribution.
+
+Natural language processing research field brings in deep learning,
+makes use of shallow neural network structure to learning a better word vector representation,
+shows great results in text classification, machine translation and many other tasks.
+Inspired by the sentence vector representation algorithm,
+this paper proposes a long-short interest model (LSIM) to describe the two improved versions hypothesis.
+The long-short interest model introduces a neural network structure to extract the sequence information
+on the user interaction timeline,
+so that better user representation and item representation can be trained,
+then they are integrated in the feature-based collaborative filtering framework,
+to solve the movie rating prediction task in the recommended system.
+In this paper, we have carried out several experiments on two kinds of real-world datasets,
+a large number of experimental results show that the long-short interest model reveals
+a great improvement than traditional collaborative filtering algorithms in the prediction accuracy.
+Meanwhile our results have a small gap between the state-of-the-art ones,
+which shows the effectiveness of the long-short interest model.
 \end{eabstract}
 
-% vim:ts=4:sw=4
+
