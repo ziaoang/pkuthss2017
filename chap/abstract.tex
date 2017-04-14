@@ -3,18 +3,7 @@
 电商平台里的商品、媒体网站里的新闻、小说网站里的作品、招聘网站里的职位等，
 当数量超过用户可以遍历的上限时，用户就无所适从了。
 推荐系统可以对海量信息进行筛选、过滤，将用户最关注最感兴趣的信息展现在用户面前，能大大增加这些内容的转化率，
-对各类应用系统都有非常巨大的价值，逐渐成为互联网平台不可或缺的一环。
-例如，著名的电商网站亚马逊公司拥有``推荐系统之王''的称号，大概有35\%的销售额是与推荐系统相关的；
-又例如国内的阿里巴巴公司，在推荐系统上也有重金投入，举办过类似``天猫推荐算法大赛''、``阿里移动推荐算法''
-等多项推荐系统学术竞赛。
-
-协同过滤作为推荐系统中应用最广泛的算法之一，可以对用户兴趣分布进行分析，从大量用户群体中找到相似兴趣的用户邻居，
-综合这些相似兴趣用户的兴趣偏好，形成推荐系统对目标用户的喜好程度预测。
-传统的协同过滤算法的基本假设是被同一用户偏爱的物品具有相似的兴趣分布，或者喜欢相同物品的用户拥有相似的兴趣分布。
-但在真实的场景中，该假设并都是成立的，因为人的兴趣分布会随着时间的流逝发生变化。
-为了描述这种兴趣漂移的现象，本文定义了用户的长期兴趣分布和短期兴趣分布
-来刻画用户在不同时间区间的兴趣状态。与此同时本文在传统协同过滤假设的基础上
-又提出了两个改进版本的假设，用以刻画物品在用户的交互时间线上的兴趣分布变化。
+对各类应用系统都有非常巨大的价值，逐渐成为互联网平台中不可或缺的一环。
 
 大数据时代的来临积累了大量的用户数据，同时计算机硬件性能的大幅度提升，这些改变带了深度学习的风靡兴起。
 深度学习作为一种机器学习范式，利用定制的神经网络结构对学习任务进行建模，
@@ -22,13 +11,24 @@
 深度学习在语音识别、图像识别等诸多研究领域上取得了突破性的进展，
 将人工智能引上了一个新的台阶，不仅学术意义重大，而且工业实用性很强，催化了大量智能产品的诞生。
 
-自然语言处理领域中引用深度学习，利用浅层神经网络结构学习出更好的词向量表示，在文本分类、
-机器翻译等评测任务上取得巨大的进展。受到句向量表示算法的启发，本文提出了长短期兴趣模型来刻画两个改进版本的假设。
-长短期兴趣模型引入了一个神经网络结构来提取用户交互时间线上的序列信息，
-从而训练处更好的用户表示和物品表示，然后再利用基于特征的协同过滤框架进行融合，
-解决推荐系统中的电影评分预测任务。本文在两类真实世界数据集上进行了多组实验，
-大量实验结果表明了长短期兴趣模型在预测准确率上都超过传统协同过滤算法，同时和目前最优模型的结果差距很小，
-证明了长短期兴趣模型的算法有效性。
+鉴于深度学习在诸多研究领域的成功应用和突破性进展，近些年来，如何将深度学习成功应用于推荐系统领域中成为了研究者们的热门话题。
+在本文中，我们提出了两种神经网络模型尝试使用深度学习来解决推荐系统中的电影评分预测任务。
+首先，我们将电影评分预测任务看成一个回归问题，基于神经网络中传统的多层感知器提出了UM模型和U-M模型，
+利用嵌入技术将用户和电影压缩至低维的向量表示，并且输入到多层感知器中的输入层中，通过隐藏层的学习和映射，在输出层输出预测评分数据。
+另外本文还使用了Dropout技术，在训练过程中随机舍去某些神经节点，提高了整体算法的鲁棒性。
+UM模型和U-M模型是使用深度学习对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，证明了深度学习在推荐系统中应用的可行性。
+
+其次，我们考虑到用户兴趣随时间流逝发生漂移的特点，提出了长短期兴趣模型，将用户的兴趣分成长期兴趣和短期兴趣两种，
+并且认为位于相同短期兴趣中的电影之间具有更高的相似度。利用所有观看过的电影生成对应的用户表示长期兴趣，
+利用用户和同一个时间窗口内的邻居电影生成对应的电影表示短期兴趣，得到带有时序特征的用户表示和电影表示。
+最后使用基于特征的矩阵分解算法融合用户嵌入表示和电影嵌入表示，生成所有的待预测评分。
+在两类真实世界数据集上进行的大量实验表明了长短期兴趣模型在预测准确率上都超过传统协同过滤算法，
+同时和目前最优模型的结果差距很小，证明了长短期兴趣模型的算法有效性。
+
+除了理论实验部分，本文还实现了一个电影推荐原型系统MovieRec。MovieRec从多个来源（如MovieLens，IMDb，TMDb等网站）获取电影的详细属性，
+更好地帮助用户全方面了解一部电影的各个方面。同时还根据用户的历史评分数据，实现了诸多经典的推荐算法以及本文提出的三个模型，
+用户可以根据自己的爱好进行切换和选择。最后对于推荐结果，MovieRec还提供了显示的反馈接口，用户可以通过点赞或者差评的方式告诉系统推荐结果的好坏，
+系统会根据用户的反馈进行推荐结果的动态调整。
 \end{cabstract}
 
 \begin{eabstract}
@@ -41,29 +41,6 @@ find the most concerned and interesting information to displayed in front of the
 and greatly increase the conversion rate of these content.
 Recommender system is valuable for vast types of applications,
 and gradually becomes an indispensable part of most Internet platform.
-For example, the famous e-commerce site Amazon has the title of ``Recommender System King'',
-about 35\% of sales are related to its recommender system;
-Another example is the domestic Alibaba company,
-it has invested lots of money in recommender system field,
-and held a number of recommender system academic competition,
-such as ``TMall Recommended Algorithm Contest '' and ``Ali Mobile Recommendation Algorithm''.
-
-As one of the most widely used algorithms in the recommender system,
-collaborative filtering can analyze the user interest distribution,
-find similar users from a large number of user groups,
-form the preference prediction of target users for recommender system,
-via synthesizing these similar users' interest preferences.
-The basic assumption of a conventional collaborative filtering algorithm is
-that the items favored by the same user have a similar distribution of interest,
-or that users who prefer the same item have similar interest distributions.
-However in the real scene, the assumption are not always true,
-because the distribution of people's interests will change over time.
-In order to describe this phenomenon of interest drift,
-this paper defines the user's long-term interest distribution and short-term interest distribution
-to describe the user's interest status in different time interval.
-At the same time, this paper proposes two improved version of the hypothesis
-based on the traditional cooperative filtering hypothesis,
-to describe the items in the user's interactive time on the distribution of interest changes.
 
 Big data era has accumulated a lot of user data, while the computer hardware performance has
 won a huge upgrade, these changes make deep learning spring up rapidly.
@@ -75,21 +52,41 @@ and image recognition, help lead artificial intelligence to a new level.
 It not only has a significant academic significance, also shows a great practicability in
 industrial circles, a large number of intelligent products are born with its contribution.
 
-Natural language processing research field brings in deep learning,
-makes use of shallow neural network structure to learning a better word vector representation,
-shows great results in text classification, machine translation and many other tasks.
-Inspired by the sentence vector representation algorithm,
-this paper proposes a long-short interest model (LSIM) to describe the two improved versions hypothesis.
-The long-short interest model introduces a neural network structure to extract the sequence information
-on the user interaction timeline,
-so that better user representation and item representation can be trained,
-then they are integrated in the feature-based collaborative filtering framework,
-to solve the movie rating prediction task in the recommended system.
-In this paper, we have carried out several experiments on two kinds of real-world datasets,
-a large number of experimental results show that the long-short interest model reveals
+In view of the successful application and breakthrough development of deep learning in many research fields,
+it has become a hot topic for researchers to successfully apply the deep learning to the recommender system in recent years.
+In this paper, we propose two neural network models to try to use the deep learning
+to solve the movie rating prediction task in the recommender system.
+Firstly, we consider the movie rating prediction task as a regression problem.
+Based on the traditional multi-layer perceptron in neural network, we propose UM model and U-M model.
+The user and movie are compressed into a low-dimensional vector representation using the embedding technique and
+then inputted into a multi-layer perceptron, the predicted ratings are outputted after hiding layer learning.
+In addition, we also use the Dropout technology, randomly drop some neural nodes in the training process,
+to improve the robustness of the overall algorithm.
+UM model and U-M model are the initial explorations to use deep learning to solve the recommender problem,
+and the experimental results are similar to the classical recommender algorithm,
+which proves the feasibility of the application of the deep learning in the recommender system.
+
+Secondly, we take the characteristics of user interest drift over time into account,
+propose the long short interest model. The user's interest is divided into two kinds: long-term interest and short-term interest,
+and that there is a higher degree of similarity between the movies located in the same short-term interest
+Long-term interest is expressed via using all the watched movies to generate the corresponding user,
+while short-term interest is expressed via using the user and the neighbor movie
+in the same time window to generate the corresponding movie.
+The user representation and movie representation containing sequential characteristics can be obtained after generation process.
+Finally, the feature-based matrix factorization algorithm is used to merge user representation
+and movie representation to generate all the predicted ratings.
+A large number of experimental results show that the long-short interest model reveals
 a great improvement than traditional collaborative filtering algorithms in the prediction accuracy.
 Meanwhile our results have a small gap between the state-of-the-art ones,
 which shows the effectiveness of the long-short interest model.
+
+In addition to the theoretical experimental part, this paper also implements a movie recommendation prototype system MovieRec. MovieRec obtains the detailed properties of a movie from a number of sources (such as MovieLens, IMDb, TMDb and other sites),
+to better help users understand all aspects of the movie.
+At the same time, MovieRec realizes many classic recommender algorithms and the proposed three models in this paper,
+to recommend movie to users according to the users' historical ratings data.
+Finally, for the recommended results, MovieRec also provides a display of the feedback interface,
+users could tell the system whether the recommended results are good or bad,
+the system will dynamic adjust the recommend results based on users' feedbacks.
 \end{eabstract}
 
 
