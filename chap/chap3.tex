@@ -318,13 +318,13 @@ $\mathbf{v}_{y^{'}}^{'}$和$\mathbf{v}_{y_{i_j}}^{'}$是分别是它们的输出
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.22]{images/svdfeature.jpeg}
+    \includegraphics[scale=0.4]{images/svdfeature.png}
     \caption{基于特征的矩阵分解}
     \label{fig:svdfeature}
 \end{figure}
 
 基于特征的矩阵分解框架如图\ref{fig:svdfeature}所示，从图中我们可以观察得到，特征一共可以分为三类：用户特征、物品特征和全局特征。
-Question，也就是框架的输入，包含用户ID和物品ID，Answer，也就是框架的输出，对应到用户给定该物品的评分数值。
+图中蓝色的Input，也就是框架的输入，包含用户ID和物品ID，红色的Output，也就是框架的输出，对应到用户给定该物品的评分数值。
 在框架中，首先会通过用户ID和物品ID找到对应的用户特征和物品特征，合并之后形成用户因子向量和物品因子向量，即图中的红色方块和蓝色圆圈，
 然后将用户因子向量和物品因子向量进行交互处理，紧接着再加上全局特征的影响，最终得到待预测的评分。
 
