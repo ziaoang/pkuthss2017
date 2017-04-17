@@ -1,68 +1,58 @@
 \begin{cabstract}
 随着互联网的快速发展，以用户产生内容为标志的Web2.0时代到来，大量且庞杂的信息充斥着人们的日常生活。
-电商平台里的商品、媒体网站里的新闻、小说网站里的作品、招聘网站里的职位等，
-当数量超过用户可以遍历的上限时，用户就无所适从了。
 推荐系统可以对海量信息进行筛选、过滤，将用户最关注最感兴趣的信息展现在用户面前，能大大增加这些内容的转化率，
 对各类应用系统都有非常巨大的价值，逐渐成为互联网平台中不可或缺的一环。
-
 大数据时代的来临积累了大量的用户数据，同时计算机硬件性能的大幅度提升，这些改变带了深度学习的风靡兴起。
 深度学习作为一种机器学习范式，利用定制的神经网络结构对学习任务进行建模，
-尝试直接从原始数据向预测目标进行端到端的转换，从而省去了大量的构建特征工程的人力花销。
-深度学习在语音识别、图像识别等诸多研究领域上取得了突破性的进展，
-将人工智能引上了一个新的台阶，不仅学术意义重大，而且工业实用性很强，催化了大量智能产品的诞生。
+直接从原始数据向预测目标进行端到端的转换，省去了大量的构建特征工程的人工花销。
+深度学习在语音识别、图像识别等诸多研究领域上取得了突破性的进展，将人工智能引上了一个新的台阶。
 
 鉴于深度学习在诸多研究领域的成功应用和突破性进展，近些年来，如何将深度学习成功应用于推荐系统领域中成为了研究者们的热门话题。
-在本文中，我们提出了两种神经网络模型尝试使用深度学习来解决推荐系统中的电影评分预测任务。
-首先，我们将电影评分预测任务看成一个回归问题，基于神经网络中传统的多层感知器提出了UM模型和U-M模型，
+在本文中，我们提出了多层感知器模型和长短期兴趣模型尝试使用深度学习来解决推荐系统中的电影评分预测任务。
+首先，我们将电影评分预测任务看成一个回归问题，
+基于神经网络中经典的多层感知器提出了UM模型（User Movie Model）和U-M模型（User minus Movie Model），
 利用嵌入技术将用户和电影压缩至低维的向量表示，并且输入到多层感知器中的输入层中，通过隐藏层的学习和映射，在输出层输出预测评分数据。
-另外本文还使用了Dropout技术，在训练过程中随机舍去某些神经节点，提高了整体算法的鲁棒性。
-UM模型和U-M模型是使用深度学习对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，证明了深度学习在推荐系统中应用的可行性。
+UM模型和U-M模型是使用神经网络对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，证明了深度学习在推荐系统中应用的可行性。
 
-其次，我们考虑到用户兴趣随时间流逝发生漂移的特点，提出了长短期兴趣模型，将用户的兴趣分成长期兴趣和短期兴趣两种，
-并且认为位于相同短期兴趣中的电影之间具有更高的相似度。利用所有观看过的电影生成对应的用户表示长期兴趣，
-利用用户和同一个时间窗口内的邻居电影生成对应的电影表示短期兴趣，得到带有时序特征的用户表示和电影表示。
-最后使用基于特征的矩阵分解算法融合用户嵌入表示和电影嵌入表示，生成所有的待预测评分。
-在两类真实世界数据集上进行的大量实验表明了长短期兴趣模型在预测准确率上都超过传统协同过滤算法，
-同时和目前最优模型的结果差距很小，证明了长短期兴趣模型的算法有效性。
+其次，针对用户兴趣随时间流逝发生漂移的特点，我们提出了长短期兴趣模型LSIM（Long Short Interest Model），
+将用户的兴趣分成长期兴趣和短期兴趣两种，并且认为位于相同短期兴趣中的物品（本文场景中是电影）之间具有更高的相似度。
+利用观看过的电影生成对应的用户的过程刻画长期兴趣，利用用户和同一个时间窗口内的邻居电影生成对应的电影的过程刻画短期兴趣，
+得到带有时序特征的用户表示和电影表示。最后使用基于特征的矩阵分解算法融合用户表示和电影表示，生成所有的待预测评分。
+在两类真实世界数据集上进行的大量实验表明了长短期兴趣模型在预测准确率上都超过经典的协同过滤算法，
+同时和目前最优模型的结果十分接近，证明了长短期兴趣模型的算法有效性。
 
 除了理论实验部分，本文还实现了一个电影推荐原型系统MovieRec。MovieRec从多个来源（如MovieLens，IMDb，TMDb等网站）获取电影的详细属性，
-更好地帮助用户全方面了解一部电影的各个方面。同时还根据用户的历史评分数据，实现了诸多经典的推荐算法以及本文提出的三个模型，
-用户可以根据自己的爱好进行切换和选择。最后对于推荐结果，MovieRec还提供了显示的反馈接口，用户可以通过点赞或者差评的方式告诉系统推荐结果的好坏，
-系统会根据用户的反馈进行推荐结果的动态调整。
+帮助用户更好地了解一部电影的各个方面。同时还根据用户的历史评分数据，实现了本文提出的多层感知器模型和长短期兴趣模型，
+以及经典的矩阵分解算法和因式分解机算法，用户可以根据自己的爱好进行切换和选择。最后对于推荐结果，MovieRec还提供了显示的反馈接口，
+用户可以通过点赞或者差评的方式反映对推荐结果的满意程度，系统会根据用户的反馈进行推荐结果的动态调整。
 \end{cabstract}
 
 \begin{eabstract}
 With the rapid development of the Internet, the Web2.0 era comes with User-Generate-Content spring up,
-a great deal of information floods people's daily life. Products in electric business platform, 
-news in media websites, works in novels websites and jobs in recruitment websites,
-when the number is bigger than the upper limit users can traverse, the user will be at a loss.
+a great deal of information floods people's daily life.
 Recommender system can filter the massive information, 
 find the most concerned and interesting information to displayed in front of the user,
 and greatly increase the conversion rate of these content.
 Recommender system is valuable for vast types of applications,
 and gradually becomes an indispensable part of most Internet platform.
-
 Big data era has accumulated a lot of user data, while the computer hardware performance has
 won a huge upgrade, these changes make deep learning spring up rapidly.
 Deep learning, as a machine learning paradigm, take advantage of custom neural network structure
-to model the learning task, attempt to perform end-to-end conversions directly from the raw data
+to model the learning task, perform end-to-end conversions directly from the raw data
 to the forecasting target, with the goal to save the cost of artificial feature engineering.
 Deep learning has made breakthrough improvement in many research field, such as speech recognition
 and image recognition, help lead artificial intelligence to a new level.
-It not only has a significant academic significance, also shows a great practicability in
-industrial circles, a large number of intelligent products are born with its contribution.
 
 In view of the successful application and breakthrough development of deep learning in many research fields,
 it has become a hot topic for researchers to successfully apply the deep learning to the recommender system in recent years.
-In this paper, we propose two neural network models to try to use the deep learning
-to solve the movie rating prediction task in the recommender system.
+In this paper, we propose multilayer perceptron model and long-short interest model to
+try to use the deep learning to solve the movie rating prediction task in the recommender system.
 Firstly, we consider the movie rating prediction task as a regression problem.
-Based on the traditional multi-layer perceptron in neural network, we propose UM model and U-M model.
+Based on the classic multi-layer perceptron in neural network,
+we propose UM model (User Movie Model) and U-M model (User minus Movie Model).
 The user and movie are compressed into a low-dimensional vector representation using the embedding technique and
 then inputted into a multi-layer perceptron, the predicted ratings are outputted after hiding layer learning.
-In addition, we also use the Dropout technology, randomly drop some neural nodes in the training process,
-to improve the robustness of the overall algorithm.
-UM model and U-M model are the initial explorations to use deep learning to solve the recommender problem,
+UM model and U-M model are the initial explorations to use neural network to solve the recommender problem,
 and the experimental results are similar to the classical recommender algorithm,
 which proves the feasibility of the application of the deep learning in the recommender system.
 
@@ -77,12 +67,13 @@ Finally, the feature-based matrix factorization algorithm is used to merge user 
 and movie representation to generate all the predicted ratings.
 A large number of experimental results show that the long-short interest model reveals
 a great improvement than traditional collaborative filtering algorithms in the prediction accuracy.
-Meanwhile our results have a small gap between the state-of-the-art ones,
+Meanwhile our results are very close to the state-of-the-art ones,
 which shows the effectiveness of the long-short interest model.
 
 In addition to the theoretical experimental part, this paper also implements a movie recommendation prototype system MovieRec. MovieRec obtains the detailed properties of a movie from a number of sources (such as MovieLens, IMDb, TMDb and other sites),
 to better help users understand all aspects of the movie.
-At the same time, MovieRec realizes many classic recommender algorithms and the proposed three models in this paper,
+At the same time, MovieRec realizes our proposed multilayer perceptron model and long-short interest model,
+and classic matrix factorization algorithm and factorization machine algorithm,
 to recommend movie to users according to the users' historical ratings data.
 Finally, for the recommended results, MovieRec also provides a display of the feedback interface,
 users could tell the system whether the recommended results are good or bad,
