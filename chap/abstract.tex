@@ -12,7 +12,7 @@
 首先，我们将电影评分预测任务看成一个回归问题，
 基于神经网络中经典的多层感知器提出了UM模型（User Movie Model）和U-M模型（User minus Movie Model），
 利用嵌入技术将用户和电影压缩至低维的向量表示，并且输入到多层感知器中的输入层中，通过隐藏层的学习和映射，在输出层输出预测评分数据。
-UM模型和U-M模型是使用神经网络对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，证明了深度学习在推荐系统中应用的可行性。
+UM模型和U-M模型是使用神经网络对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，展示了深度学习在推荐系统中应用的可行性。
 
 其次，针对用户兴趣随时间流逝发生漂移的特点，我们提出了长短期兴趣模型LSIM（Long Short Interest Model），
 将用户的兴趣分成长期兴趣和短期兴趣两种，并且认为位于相同短期兴趣中的物品（本文场景中是电影）之间具有更高的相似度。
@@ -28,54 +28,55 @@ UM模型和U-M模型是使用神经网络对求解推荐问题进行的初步探
 \end{cabstract}
 
 \begin{eabstract}
-With the rapid development of the Internet, the Web2.0 era comes with User-Generate-Content spring up,
-a great deal of information floods people's daily life.
+With the rapid development of the Internet, the Web2.0 era comes, as a result,
+a great deal of user-generated information floods people's daily life.
 Recommender system can filter the massive information, 
-find the most concerned and interesting information to displayed in front of the user,
-and greatly increase the conversion rate of these content.
-Recommender system is valuable for vast types of applications,
-and gradually becomes an indispensable part of most Internet platform.
-Big data era has accumulated a lot of user data, while the computer hardware performance has
-won a huge upgrade, these changes make deep learning spring up rapidly.
-Deep learning, as a machine learning paradigm, take advantage of custom neural network structure
-to model the learning task, perform end-to-end conversions directly from the raw data
-to the forecasting target, with the goal to save the cost of artificial feature engineering.
-Deep learning has made breakthrough improvement in many research field, such as speech recognition
-and image recognition, help lead artificial intelligence to a new level.
+find the most concerned and interesting information to display in front of users,
+which could greatly increase the conversion rate of these content.
+Meanwhile, recommender system is valuable for vast types of applications,
+and gradually becomes an indispensable part of most Internet platforms.
+Big data era has accumulated lots of data, while the computer hardware performance has won a huge upgrade,
+these changes make deep learning spring up rapidly. Deep learning, as a machine learning paradigm,
+takes advantage of custom neural network structures to model the learning task,
+performs directly end-to-end conversions from the raw data to the forecasting target,
+with the goal to save the cost of artificial feature engineering.
+Deep learning has made breakthrough improvement in many research fields,
+such as speech recognition and image recognition, help lead artificial intelligence to a new level.
 
-In view of the successful application and breakthrough development of deep learning in many research fields,
-it has become a hot topic for researchers to successfully apply the deep learning to the recommender system in recent years.
-In this paper, we propose multilayer perceptron model and long-short interest model to
-try to use the deep learning to solve the movie rating prediction task in the recommender system.
+In view of these successful applications and breakthrough developments of deep learning in many research fields,
+it has become a hot topic for researchers to successfully apply deep learning to recommender system in recent years.
+In this paper, we propose multilayer perceptron model and long-short interest model,
+which aims to use deep learning to solve the movie rating prediction task in recommender system.
 Firstly, we consider the movie rating prediction task as a regression problem.
 Based on the classic multi-layer perceptron in neural network,
 we propose UM model (User Movie Model) and U-M model (User minus Movie Model).
-The user and movie are compressed into a low-dimensional vector representation using the embedding technique and
-then inputted into a multi-layer perceptron, the predicted ratings are outputted after hiding layer learning.
-UM model and U-M model are the initial explorations to use neural network to solve the recommender problem,
-and the experimental results are similar to the classical recommender algorithm,
-which proves the feasibility of the application of the deep learning in the recommender system.
+The user and movie are compressed into a low-dimensional vector representation using the embedding technique,
+then they are inputted into a multi-layer perceptron, the predicted ratings are outputted after hiding layer learning.
+UM model and U-M model are the initial explorations to use neural network to solve the recommender problems,
+and the experimental results are similar to the classical recommender algorithms,
+which shows the feasibility of the application of deep learning in recommender system.
 
-Secondly, we take the characteristics of user interest drift over time into account,
-propose the long short interest model. The user's interest is divided into two kinds: long-term interest and short-term interest,
-and that there is a higher degree of similarity between the movies located in the same short-term interest
+Secondly, we take the characteristics that user interest drifts over time into account, propose the long short interest model.
+The user's interest is divided into two kinds: long-term interest and short-term interest,
+and there is a higher similarity between the movies located in the same short-term interest.
 Long-term interest is expressed via using all the watched movies to generate the corresponding user,
-while short-term interest is expressed via using the user and the neighbor movie
+while short-term interest is expressed via using the user and the neighbor movies
 in the same time window to generate the corresponding movie.
-The user representation and movie representation containing sequential characteristics can be obtained after generation process.
-Finally, the feature-based matrix factorization algorithm is used to merge user representation
-and movie representation to generate all the predicted ratings.
-A large number of experimental results show that the long-short interest model reveals
-a great improvement than traditional collaborative filtering algorithms in the prediction accuracy.
+The user representation and movie representation, which contains sequential characteristics,
+can be obtained after the generation process.
+Finally, the feature-based matrix factorization algorithm is used to merge user representation and movie representation,
+to generate all the predicted ratings.
+A large number of experimental results show that the long-short interest model reveals a great improvement
+than traditional collaborative filtering algorithms in the prediction accuracy.
 Meanwhile our results are very close to the state-of-the-art ones,
 which shows the effectiveness of the long-short interest model.
 
-In addition to the theoretical experimental part, this paper also implements a movie recommendation prototype system MovieRec. MovieRec obtains the detailed properties of a movie from a number of sources (such as MovieLens, IMDb, TMDb and other sites),
-to better help users understand all aspects of the movie.
+In addition to the theoretical and experimental part, this paper also implements a movie recommendation prototype system MovieRec. MovieRec obtains the detailed properties of a movie from a number of sources (such as MovieLens, IMDb, TMDb and other sites),
+to help users better understand all aspects of the movie.
 At the same time, MovieRec realizes our proposed multilayer perceptron model and long-short interest model,
 and classic matrix factorization algorithm and factorization machine algorithm,
 to recommend movie to users according to the users' historical ratings data.
-Finally, for the recommended results, MovieRec also provides a display of the feedback interface,
+Finally, for the recommended results, MovieRec also provides a feedback interface,
 users could tell the system whether the recommended results are good or bad,
 the system will dynamic adjust the recommend results based on users' feedbacks.
 \end{eabstract}
