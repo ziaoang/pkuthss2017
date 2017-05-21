@@ -11,19 +11,19 @@
 在本文中，我们提出了多层感知器模型和长短期兴趣模型尝试使用深度学习来解决推荐系统中的电影评分预测任务。
 首先，我们将电影评分预测任务看成一个回归问题，
 基于神经网络中经典的多层感知器提出了UM模型（User Movie Model）和U-M模型（User minus Movie Model），
-利用嵌入技术将用户和电影压缩至低维的向量表示，并且输入到多层感知器中的输入层中，通过隐藏层的学习和映射，在输出层输出预测评分数据。
+利用嵌入技术将用户和电影信息压缩至低维的向量表示，并且输入到多层感知器中的输入层中，通过隐藏层的学习和映射，在输出层输出预测评分数据。
 UM模型和U-M模型是使用神经网络对求解推荐问题进行的初步探索，取得了和经典推荐算法相近的实验效果，展示了深度学习在推荐系统中应用的可行性。
 
 其次，针对用户兴趣随时间流逝发生漂移的特点，我们提出了长短期兴趣模型LSIM（Long Short Interest Model），
 将用户的兴趣分成长期兴趣和短期兴趣两种，并且认为位于相同短期兴趣中的物品（本文场景中是电影）之间具有更高的相似度。
-利用观看过的电影生成对应的用户的过程刻画长期兴趣，利用用户和同一个时间窗口内的邻居电影生成对应的电影的过程刻画短期兴趣，
+利用观看过的电影生成对应的用户刻画长期兴趣，利用用户和同一个时间窗口内的邻居电影生成对应的电影刻画短期兴趣，
 得到带有时序特征的用户表示和电影表示。最后使用基于特征的矩阵分解算法融合用户表示和电影表示，生成所有的待预测评分。
 在两类真实世界数据集上进行的大量实验表明了长短期兴趣模型在预测准确率上都超过经典的协同过滤算法，
 同时和目前最优模型的结果十分接近，证明了长短期兴趣模型的算法有效性。
 
 除了理论实验部分，本文还实现了一个电影推荐原型系统MovieRec。MovieRec从多个来源（如MovieLens，IMDb，TMDb等网站）获取电影的详细属性，
 帮助用户更好地了解一部电影的各个方面。同时还根据用户的历史评分数据，实现了本文提出的多层感知器模型和长短期兴趣模型，
-以及经典的矩阵分解算法和因式分解机算法，用户可以根据自己的爱好进行切换和选择。最后对于推荐结果，MovieRec还提供了显示的反馈接口，
+以及经典的矩阵分解算法和因式分解机算法，用户可以根据自己的爱好进行切换和选择。最后对于推荐结果，MovieRec还提供了显式的反馈接口，
 用户可以通过点赞或者差评的方式反映对推荐结果的满意程度，系统会根据用户的反馈进行推荐结果的动态调整。
 \end{cabstract}
 
@@ -50,7 +50,7 @@ which aims to use deep learning to solve the movie rating prediction task in rec
 Firstly, we consider the movie rating prediction task as a regression problem.
 Based on the classic multi-layer perceptron in neural network,
 we propose UM model (User Movie Model) and U-M model (User minus Movie Model).
-The user and movie are compressed into a low-dimensional vector representation using the embedding technique,
+The user and movie information are compressed into a low-dimensional vector representation using the embedding technique,
 then they are inputted into a multi-layer perceptron, the predicted ratings are outputted after hiding layer learning.
 UM model and U-M model are the initial explorations to use neural network to solve the recommender problems,
 and the experimental results are similar to the classical recommender algorithms,

@@ -268,7 +268,7 @@ F1 = \frac{Precision \cdot Recall}{ \alpha \cdot Precision + (1 - \alpha) \cdot 
 \end{equation}
 其中，$\alpha$的数值位于0到1之间，用于控制准确率和召回率两者相对的影响因子。
 
-\subsection{其他一些指标}
+\subsection{其他指标}
 同时推荐系统中还包含其他一些评价指标，我们在此简单介绍如下：
 \begin{itemize}
 \item \textbf{覆盖率}描述了一个推荐系统对长尾物品（Long Tail）的挖掘能力，
@@ -339,7 +339,7 @@ Loss = \sum_{t=1}^T {\log P(w_{t-c} : w_{t+c} | w_t) }
 似然概率$P(w_{t-c} : w_{t+c} | w_t)$也是使用softmax定义.
 
 \subsection{句向量表示}
-2014年Le等人在Word2Vec的基础上提出了Doc2Vec模型，其原理与Word2Vec非常的相似。
+2014年Le等人\parencite{le2014distributed}在Word2Vec的基础上提出了Doc2Vec模型，其原理与Word2Vec非常的相似。
 Doc2Vec也包括两个基本模型，分别是DM模型和DBOW模型，如图\ref{fig:doc2vec}所示。
 
 \begin{figure}[htbp]
@@ -398,7 +398,7 @@ Strub等人\parencite{strub2016hybrid}在此基础上进行了改进，
 
 CFN模型和本文方法都是使用定制的神经网络结构对推荐问题进行建模，不同的是他们采用了自动编码机，而我们使用了多层感知器。
 相比较而言，相同实验设定下，自动编码机模型的参数规模大约是多层感知器的两倍，主要因为自动编码机包含编码层和解码层，
-而多层感知器只有编码层；但由于噪声机制的引入，CFN模型除了具备数据还原能力，还用于数据去噪能力，
+而多层感知器只有编码层；但由于噪声机制的引入，CFN模型除了具备数据还原能力和数据去噪能力，
 在预测准确度和鲁棒性上都高于多层感知器。
 
 \subsection{循环神经网络}
